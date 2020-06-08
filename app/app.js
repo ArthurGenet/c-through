@@ -70,13 +70,13 @@ define([
         // application settings
         var settings_demo = {
             name: "Demo",
-            url: "http://zurich.maps.arcgis.com",           // portal URL for config
-            webscene: "0af10b5e35ed4a5bbe095aa76b14b786",   // portal item ID of the webscene
-            usagename: "usage",                             // usage attribute (string)
-            floorname: "floorID",                           // floor attribute (int)
+            url: "http://esrinederland.maps.arcgis.com",    // portal URL for config
+            webscene: "178dd98df2aa457eaedab607d0d8d7f4",   // portal item ID of the webscene
+            usagename: "Usage Type",                             // usage attribute (string)
+            floorname: "Floor Level",                           // floor attribute (int)
             OIDname: "OBJECTID",                            // objectid
-            buildingIDname: "buildingID",                   // building attribute (int)
-            areaname: "unitarea",                           // area attribute (float)
+            buildingIDname: "Building ID",                   // building attribute (int)
+            areaname: "Area Unit",                           // area attribute (float)
             color: [                                        // color ramp for unique value renderer
                     [178, 171, 210, 1],                     
                     [253, 174, 97, 1],
