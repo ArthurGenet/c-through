@@ -69,29 +69,36 @@ define([
 
         // application settings
         var settings_demo = {
-            name: "Demo",
-            url: "http://esrinederland.maps.arcgis.com",    // portal URL for config
-            webscene: "178dd98df2aa457eaedab607d0d8d7f4",   // portal item ID of the webscene
-            usagename: "Usage Type",                             // usage attribute (string)
-            floorname: "Floor Level",                           // floor attribute (int)
+            name: "C Through Test",
+            url: "https://esrinederland.maps.arcgis.com",    // portal URL for config
+            webscene: "81a8f20be12f49bdb0ff9a4bbe462118",   // portal item ID of the webscene
+            usagename: "Usage_Type",                             // usage attribute (string)
+            floorname: "Floor_Level",                           // floor attribute (int)
             OIDname: "OBJECTID",                            // objectid
-            buildingIDname: "Building ID",                   // building attribute (int)
-            areaname: "Area Unit",                           // area attribute (float)
-            color: [                                        // color ramp for unique value renderer
-                    [178, 171, 210, 1],                     
-                    [253, 174, 97, 1],
-                    [50, 136, 189, 1],
-                    [102, 194, 165, 1],
-                    [230, 245, 152, 1],
-                    [213, 62, 79, 1],
-                    [94, 79, 162, 1],
-                    [254, 224, 139, 1],
-                    [253, 174, 97, 1],
-                    [135, 135, 135, 1],
-                    [255, 255, 153, 1],
-                    [185, 185, 185, 1],
-                    [171, 221, 164, 1],
-                    [202, 178, 214, 1],
+            buildingIDname: "Building_ID",                   // building attribute (int)
+            areaname: "Area_Unit",                           // area attribute (float)
+            color: [      
+                                             // color ramp for unique value renderer
+                    [252, 146, 31, 1], //bijenkoste
+                    [254, 224, 139, 1], //gemenste
+                    [247, 137, 216, 1], //gezondheit
+                    [183, 129, 74, 1], //industrie
+                    [158, 85, 156, 1], //kantooor
+                    
+                    [107, 107, 214, 1], //logie
+                    
+                    
+                    [255, 255, 255, 1], //other 
+                    [20, 158, 206, 1], //overig
+                    
+                    
+                    [60, 175, 153, 1], //sport
+                    [167, 198, 54, 1], // winkel
+                    
+                    [237, 81, 81, 1], //wonen
+
+                    [107, 107, 214, 1],
+                    
                     [251, 128, 114, 1],
                     [214, 96, 77, 1],
                     [209, 229, 240, 1],
@@ -174,7 +181,7 @@ define([
                     // retrieve active layer from webscene
                     this.settings.layer1 = this.scene.layers.getItemAt(0);
 
-                    // create background layer (identical copy of activ layer) for highlighting and add it to the scene
+                    // create background layer (identical copy of active layer) for highlighting and add it to the scene
                     this.settings.layer2 = new SceneLayer({
                         url: this.settings.layer1.url,
                         popupEnabled: false
@@ -183,10 +190,10 @@ define([
 
                     this.settings.layer1.visible = true;
                     this.settings.layer2.visible = false;
-
+                    console.log("ok3");
                     // retrieve distinct values of usage attribute from feature service to create UI (filter dropdowns)
                     queryTools.distinctValues(this.settings.layer1, this.settings.usagename, this.settings.OIDname, function (distinctValues) {
-
+                        console.log("ok");
                         distinctValues.sort();
                         this.settings.values = distinctValues;
 
@@ -213,6 +220,7 @@ define([
                             }
                         });
                     }.bind(this));
+                console.log("ok2");
 
                 }.bind(this)).otherwise(function (err) {
                     console.error(err);
