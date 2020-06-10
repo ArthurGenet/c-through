@@ -211,8 +211,8 @@ define([
             setVizCity: function (vizName, highlight, selection) {
                 var settings = this.settings;
 
-                settings.layer1.opacity = 0.8;
-                settings.layer2.opacity = 0.8;
+                settings.layer1.opacity = 0.92;
+                settings.layer2.opacity = 0.92;
 
                 if (selection !== undefined && selection !== "") {
 

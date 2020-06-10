@@ -69,7 +69,7 @@ define([
 
         // application settings
         var settings_demo = {
-            name: "C Through Test",
+            name: "Demo",
             url: "https://esrinederland.maps.arcgis.com",    // portal URL for config
             webscene: "81a8f20be12f49bdb0ff9a4bbe462118",   // portal item ID of the webscene
             usagename: "Usage_Type",                             // usage attribute (string)
