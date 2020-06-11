@@ -173,6 +173,12 @@ define([
                     view: this.view
                 });
                 this.view.ui.add(homeWidget, "top-left");
+                var windowHitht = document.documentElement.clientHeight;
+                    toolsMenuInnerBox.style.height = windowHitht - 50 + "px";
+                    window.addEventListener("resize", function(){
+                        windowHitht = document.documentElement.clientHeight;
+                        toolsMenuInnerBox.style.height = windowHitht - 50 + "px";
+                    });
 
                 // wait until view is loaded
                 this.view.when(function () {

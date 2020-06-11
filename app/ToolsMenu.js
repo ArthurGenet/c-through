@@ -60,10 +60,25 @@ define([
             },
 
             createUI: function () {
-                this.containerSelect = domCtr.create("div", { className: "containerSelect" }, dom.byId("toolsMenu"));
-                this.containerViz = domCtr.create("div", { className: "containerViz" }, dom.byId("toolsMenu"));
-                this.containerFilter = domCtr.create("div", { className: "containerFilter", id: "containerFilter" }, dom.byId("toolsMenu"));
+                var toolsMenuInnerBox = document.querySelector("#toolsMenuInnerBox");
+                var toolsMenu = document.querySelector("#toolsMenu");
+                var viewDiv = document.querySelector("#viewDiv");
+                this.containerArrow = domCtr.create("div", { className: "arrowUp" }, dom.byId("toolsMenuInnerBox"));
+                
+                this.containerSelect = domCtr.create("div", { className: "containerSelect" }, dom.byId("toolsMenuInnerBox"));
+                this.containerViz = domCtr.create("div", { className: "containerViz" }, dom.byId("toolsMenuInnerBox"));
+                this.containerFilter = domCtr.create("div", { className: "containerFilter", id: "containerFilter" }, dom.byId("toolsMenuInnerBox"));
+                var arrowUp = document.querySelector(".arrowUp");
+                var containerSelect = document.querySelector(".containerSelect");
 
+                var windowHitht = document.documentElement.clientHeight;
+                    toolsMenuInnerBox.style.height = windowHitht - 50 + "px";
+                    window.addEventListener("resize", function(){
+                        windowHitht = document.documentElement.clientHeight;
+                        toolsMenuInnerBox.style.height = windowHitht - 50 + "px";
+                        toolsMenu.style.height = windowHitht - 50 + "px";
+
+                    });
             },
 
             setupTools: function () {
@@ -147,7 +162,7 @@ define([
                     console.log(mode);
                     //if (mode == "highlight") {
                         this.setHighlightState({ name: "city", expression: undefined });
-                    //}
+                    //} 
                 }.bind(this));
             },
 
