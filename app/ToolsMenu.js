@@ -53,7 +53,6 @@ define([
                 this.settings = params.config;
                 this.scene = params.map;
                 this.view = params.view;
-
                 this.state = params.state;
 
                 this.createUI();
@@ -89,6 +88,7 @@ define([
                     filterstate: this.state.filter,
                     settings: this.settings,
                     view: this.view
+                    
                 });
 
             },
@@ -144,9 +144,10 @@ define([
                     if (mode == "filter") {
                         this.setHighlightState(this.state.highlight);
                     }
-                    if (mode == "highlight") {
+                    console.log(mode);
+                    //if (mode == "highlight") {
                         this.setHighlightState({ name: "city", expression: undefined });
-                    }
+                    //}
                 }.bind(this));
             },
 

@@ -79,8 +79,9 @@ define([
             areaname: "Area_Unit",                           // area attribute (float)
             color: [      
                                              // color ramp for unique value renderer
+                    //other 
                     [252, 146, 31, 1], //bijenkoste
-                    [254, 224, 139, 1], //gemenste
+                    [254, 224, 139, 1], //gemengde
                     [247, 137, 216, 1], //gezondheit
                     [183, 129, 74, 1], //industrie
                     [158, 85, 156, 1], //kantooor
@@ -88,7 +89,7 @@ define([
                     [107, 107, 214, 1], //logie
                     
                     
-                    [255, 255, 255, 1], //other 
+                    [0,0,0],
                     [20, 158, 206, 1], //overig
                     
                     
@@ -186,16 +187,19 @@ define([
                         url: this.settings.layer1.url,
                         popupEnabled: false
                     });
+                    this.settings.render = this.settings.layer1.renderer;
+                    console.log(this.settings.render);
+
+
                     this.scene.add(this.settings.layer2);
 
                     this.settings.layer1.visible = true;
                     this.settings.layer2.visible = false;
-                    console.log("ok3");
                     // retrieve distinct values of usage attribute from feature service to create UI (filter dropdowns)
                     queryTools.distinctValues(this.settings.layer1, this.settings.usagename, this.settings.OIDname, function (distinctValues) {
-                        console.log("ok");
                         distinctValues.sort();
                         this.settings.values = distinctValues;
+                        console.log(this.settings.values);
 
                         // initiliaze tools menu with state
                         this.menu = new ToolsMenu({
@@ -220,7 +224,6 @@ define([
                             }
                         });
                     }.bind(this));
-                console.log("ok2");
 
                 }.bind(this)).otherwise(function (err) {
                     console.error(err);
@@ -230,7 +233,7 @@ define([
 
             getSettingsFromUser: function (settings) {
                 if (settings === "demo"){
-                    dom.byId("headerTitle").innerHTML = "c-through Demo";
+                    dom.byId("headerTitle").innerHTML = "c-through Netherlands";
                     return settings_demo;
                 }
             }

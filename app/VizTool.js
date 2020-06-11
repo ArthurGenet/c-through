@@ -65,6 +65,7 @@ define([
                 this.filter = params.filterstate;
                 this.settings = params.settings;
                 this.view = params.view;
+                this.render = params.render;
 
                 this.createUI(this.container);
                 this.updateUI(this.viz);
@@ -133,6 +134,7 @@ define([
                     this.reload = domCtr.create("div", { id: "reload" }, this.container);
                     domCtr.create("img", { className: "reload", src: "img/reload.png", style: "width:25px;height:25px" }, this.reload);
                 }
+
             },
 
             updateVizState: function (state) {
@@ -215,22 +217,44 @@ define([
                 settings.layer2.opacity = 0.92;
 
                 if (selection !== undefined && selection !== "") {
-
+                    console.log("1");
                     settings.layer1.definitionExpression = selection;
+
+                    //settings.layer2.visible = false;
+
+
+                    if (highlight == undefined) {
+                        console.log("2");
+                        settings.layer2.visible = false;
+                    } else {
+                        console.log("3");
+                        settings.layer2.visible = true;
+
+                        settings.layer2.renderer = this.settings.render;
+                        settings.layer2.definitionExpression = settings.buildingIDname + " NOT IN (" + highlight + ")";
+                        settings.layer2.opacity = 0.5;
+                    }
+                } else {
+                    console.log("4");
+                    settings.layer1.visible = true;
 
                     settings.layer2.visible = false;
 
-                    if (highlight == undefined) {
-                        settings.layer2.visible = false;
-                    } else {
-                        settings.layer2.visible = true;
-                        settings.layer2.renderer = null;
-                        settings.layer2.definitionExpression = settings.buildingIDname + " NOT IN (" + highlight + ")";
-                    }
-                } else {
                     settings.layer1.definitionExpression = undefined;
-                    settings.layer1.renderer = null;
+                    if (vizName === "white"){
+                        settings.layer1.renderer = this.settings.render;
+                    }
+                    if(vizName === "usage"){
+                        settings.layer1.renderer = applyRenderer.createRenderer(settings.values, settings.color, settings.usagename);
+                    }
+     
+                    if (vizName === "area"){
+                        settings.layer1.renderer = this.settings.render;
+                    }
+
+                    //settings.layer1.renderer = null;
                 }
+
 
                 // visualization
 
@@ -246,7 +270,9 @@ define([
                 var settings = this.settings;
 
                 if (vizName === "white") {
-                    settings.layer1.renderer = null;
+                    settings.layer1.renderer = this.settings.render;
+                   
+                    //settings.layer1.renderer = null;
 
                     domStyle.set(dom.byId("chartDiv"), { "opacity": 0 });
                     domStyle.set(dom.byId("statsDiv"), { "opacity": 1 });
@@ -256,6 +282,7 @@ define([
                     }.bind(this));
                 }
                 if (vizName === "usage") {
+                    console.log("par ici");
                     settings.layer1.renderer = applyRenderer.createRenderer(settings.values, settings.color, settings.usagename);
 
                     domStyle.set(dom.byId("chartDiv"), { "opacity": 1 });
@@ -266,7 +293,8 @@ define([
                     }.bind(this));
                 }
                 if (vizName === "area") {
-                    settings.layer1.renderer = applyRenderer.createRendererVV(initData, settings.areaname);
+                    //settings.layer1.renderer = applyRenderer.createRendererVV(initData, settings.areaname);
+                    settings.layer1.renderer = this.settings.render;
 
                     domStyle.set(dom.byId("chartDiv"), { "opacity": 1 });
                     domStyle.set(dom.byId("statsDiv"), { "opacity": 0 });
@@ -293,7 +321,7 @@ define([
                     var selection = result.features;
 
                     if (vizName === "white") {
-                        settings.layer1.renderer = applyRenderer.createSimpleRenderer();
+                        //settings.layer1.renderer = applyRenderer.createSimpleRenderer();
 
                         domStyle.set(dom.byId("chartDiv"), { "opacity": 0 });
                         domStyle.set(dom.byId("statsDiv"), { "opacity": 1 });
@@ -304,7 +332,7 @@ define([
                         });
                     }
                     if (vizName === "usage") {
-                        settings.layer1.renderer = applyRenderer.createRenderer(settings.values, settings.color, settings.usagename);
+                        //settings.layer1.renderer = applyRenderer.createRenderer(settings.values, settings.color, settings.usagename);
 
                         domStyle.set(dom.byId("chartDiv"), { "opacity": 1 });
                         domStyle.set(dom.byId("statsDiv"), { "opacity": 0 });
@@ -320,7 +348,7 @@ define([
                         });
                     }
                     if (vizName === "area") {
-                        settings.layer1.renderer = applyRenderer.createRendererVV(selection, settings.areaname);
+                        //settings.layer1.renderer = applyRenderer.createRendererVV(selection, settings.areaname);
 
                         domStyle.set(dom.byId("chartDiv"), { "opacity": 1 });
                         domStyle.set(dom.byId("statsDiv"), { "opacity": 0 });

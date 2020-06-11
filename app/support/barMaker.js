@@ -123,7 +123,6 @@ define([
 
                 if (bins_new > 9) {
                     color = ["#FBE789", "#E2DD8C", "#C9D38F", "#B0CA93", "#97C096", "#7EB699", "#65AD9D", "#4CA3A0", "#3399A3", "#1B90A7"];
-
                 }
                 else {
                     color = ["#FBE789", "#CED58F", "#A1C495", "#74B29B", "#47A1A1", "#1B90A7"];
@@ -204,7 +203,7 @@ define([
                     var max = event.item.dataContext.subdata[0].max;
                     var min = event.item.dataContext.subdata[0].min;
                     var color = event.item.dataContext.color;
-
+                    console.log(color);
                     settings.layer1.renderer = applyRenderer.createRendererVVbar(min, max, color, settings.areaname);
                     
                     view.environment.lighting.directShadowsEnabled = false;
