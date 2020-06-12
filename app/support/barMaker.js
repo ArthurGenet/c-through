@@ -38,10 +38,10 @@ define([
     applyRenderer, queryTools
 ) {
         return {
-
             createChartData: function (selection, settings, bins) {
 
                 this.selection = selection;
+
 
                 var chartData = [];
                 var kernel = [];
@@ -203,7 +203,6 @@ define([
                     var max = event.item.dataContext.subdata[0].max;
                     var min = event.item.dataContext.subdata[0].min;
                     var color = event.item.dataContext.color;
-                    console.log(color);
                     settings.layer1.renderer = applyRenderer.createRendererVVbar(min, max, color, settings.areaname);
                     
                     view.environment.lighting.directShadowsEnabled = false;
@@ -212,8 +211,9 @@ define([
 
                 on(dom.byId("reload"), "click", function (event) {
 
-                    settings.layer1.renderer = applyRenderer.createRendererVV(selection, settings.areaname);
-                    
+                    //settings.layer1.renderer = applyRenderer.createRendererVV(selection, settings.areaname);
+                    settings.layer1.renderer = settings.render;
+
                     view.environment.lighting.directShadowsEnabled = true;
                     view.environment.lighting.ambientOcclusionEnabled = true;
                 });

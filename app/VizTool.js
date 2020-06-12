@@ -213,21 +213,18 @@ define([
             setVizCity: function (vizName, highlight, selection) {
                 var settings = this.settings;
 
-                settings.layer1.opacity = 0.92;
-                settings.layer2.opacity = 0.92;
+                settings.layer1.opacity = 0.85;
+                settings.layer2.opacity = 0.85;
 
                 if (selection !== undefined && selection !== "") {
-                    console.log("1");
                     settings.layer1.definitionExpression = selection;
 
                     //settings.layer2.visible = false;
 
 
                     if (highlight == undefined) {
-                        console.log("2");
                         settings.layer2.visible = false;
                     } else {
-                        console.log("3");
                         settings.layer2.visible = true;
 
                         settings.layer2.renderer = this.settings.render;
@@ -235,7 +232,6 @@ define([
                         settings.layer2.opacity = 0.5;
                     }
                 } else {
-                    console.log("4");
                     settings.layer1.visible = true;
 
                     settings.layer2.visible = false;
@@ -282,7 +278,6 @@ define([
                     }.bind(this));
                 }
                 if (vizName === "usage") {
-                    console.log("par ici");
                     settings.layer1.renderer = applyRenderer.createRenderer(settings.values, settings.color, settings.usagename);
 
                     domStyle.set(dom.byId("chartDiv"), { "opacity": 1 });
@@ -306,7 +301,6 @@ define([
             },
 
             changeVisualiationSelection: function (vizName, menu, settings, view) {
-
                 if (this.loadingState !== "busy") {
                     this.menu.setLoadingState("busy");
                 }
@@ -341,8 +335,8 @@ define([
                         chartMaker.createChart(view, chartData, settings, "building", function (state) {
                             menu.setLoadingState(state);
                         });
-
                         var data = statsMaker.createChartData(selection, settings);
+
                         statsMaker.createChart(data, function (state) {
                             menu.setLoadingState(state);
                         });

@@ -71,7 +71,7 @@ define([
         var settings_demo = {
             name: "Demo",
             url: "https://esrinederland.maps.arcgis.com",    // portal URL for config
-            webscene: "81a8f20be12f49bdb0ff9a4bbe462118",   // portal item ID of the webscene
+            webscene: "526c24dc95fe4ccdbe354a3e35cab4a6",   // portal item ID of the webscene
             usagename: "Usage_Type",                             // usage attribute (string)
             floorname: "Floor_Level",                           // floor attribute (int)
             OIDname: "OBJECTID",                            // objectid
@@ -150,14 +150,7 @@ define([
                 this.view.environment.lighting.ambientOcclusionEnabled = true;
                 this.view.environment.lighting.directShadowsEnabled = true;
 
-                // create search widget
-                var searchWidget = new Search({
-                    view: this.view
-                });
-                this.view.ui.add(searchWidget, {
-                    position: "top-right",
-                    index: 2
-                });
+
 
                 // create home button that leads back to welcome page
                 var home = domCtr.create("div", { className: "button", id: "homeButton", innerHTML: "Home" }, header);
@@ -173,12 +166,7 @@ define([
                     view: this.view
                 });
                 this.view.ui.add(homeWidget, "top-left");
-                var windowHitht = document.documentElement.clientHeight;
-                    toolsMenuInnerBox.style.height = windowHitht - 50 + "px";
-                    window.addEventListener("resize", function(){
-                        windowHitht = document.documentElement.clientHeight;
-                        toolsMenuInnerBox.style.height = windowHitht - 50 + "px";
-                    });
+                
 
                 // wait until view is loaded
                 this.view.when(function () {
@@ -188,24 +176,60 @@ define([
                     // retrieve active layer from webscene
                     this.settings.layer1 = this.scene.layers.getItemAt(0);
 
+                    var popup = {
+                        title: "Building Information", // the title of the popup
+                        "content": [{
+                            "type": "fields",
+                            "fieldInfos": [
+                                {
+                                  "fieldName": this.settings.usagename,
+                                  "label": "Usage Name",
+                                  "isEditable": true,
+                                  "tooltip": "",
+                                  "visible": true,
+                                  "format": null,
+                                  "stringFieldOption": "text-box"
+                                },
+                                {
+                                  "fieldName": this.settings.floorname,
+                                  "label": "Floor Level",
+                                  "isEditable": true,
+                                  "tooltip": "",
+                                  "visible": true,
+                                  "format": null,
+                                  "stringFieldOption": "text-box"
+                                },
+                                {
+                                  "fieldName": this.settings.areaname,
+                                  "label": "Area in m2",
+                                  "isEditable": true,
+                                  "tooltip": "",
+                                  "visible": true,
+                                  "format": null,
+                                  "stringFieldOption": "text-box"
+                                }
+                                
+                            ]
+                        }]
+                    }
+                    this.settings.layer1.popupTemplate =popup;
                     // create background layer (identical copy of active layer) for highlighting and add it to the scene
                     this.settings.layer2 = new SceneLayer({
                         url: this.settings.layer1.url,
                         popupEnabled: false
                     });
                     this.settings.render = this.settings.layer1.renderer;
-                    console.log(this.settings.render);
 
 
                     this.scene.add(this.settings.layer2);
 
                     this.settings.layer1.visible = true;
+
                     this.settings.layer2.visible = false;
                     // retrieve distinct values of usage attribute from feature service to create UI (filter dropdowns)
                     queryTools.distinctValues(this.settings.layer1, this.settings.usagename, this.settings.OIDname, function (distinctValues) {
                         distinctValues.sort();
                         this.settings.values = distinctValues;
-                        console.log(this.settings.values);
 
                         // initiliaze tools menu with state
                         this.menu = new ToolsMenu({

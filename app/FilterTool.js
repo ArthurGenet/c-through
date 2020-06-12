@@ -105,7 +105,8 @@ define([
             },
 
             updateUI: function (state) {
-
+                
+                
                 if (state.name === "none") {
                     domCtr.destroy(dom.byId("filter-floors"));
                     domCtr.destroy(dom.byId("filter-usage"));
@@ -114,11 +115,12 @@ define([
                     domCtr.destroy(dom.byId("AreaMinText"));
 
                     this.createFilterFloorUI(this.container);
+
                     this.createFilterUsageUI(this.container);
+
                     this.createFilterAreaUI(this.container);
 
                 } else {
-
                     if (state.floorFeatures !== undefined) {
                         if (state.usageFeatures !== undefined) {
                             if (state.areaFeatures !== undefined) {
@@ -195,9 +197,7 @@ define([
             },
 
             createFilterFloorUI: function (container) {
-
                 this.LevelFilterContainer = domCtr.create("div", { className: "FilterLabel", id: "filter-floors" }, container);
-
                 queryTools.distinctValues(this.settings.layer1, this.settings.floorname, this.settings.OIDname, function (distinctValues) {
                     distinctValues.sort();
                     distinctValues.unshift("Select Floor");

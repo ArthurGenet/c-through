@@ -40,7 +40,6 @@ define([
         return {
 
             createSimpleRenderer: function () {
-                console.log("b");
                 return new SimpleRenderer({
                     symbol: new MeshSymbol3D({
                         symbolLayers: [
@@ -54,7 +53,6 @@ define([
             },
 
             createRenderer: function (values, color, fieldname) {
-                console.log("a");
                 return new UniqueValueRenderer({
                     defaultSymbol: new MeshSymbol3D({
                         symbolLayers: [new FillSymbol3DLayer({
@@ -167,11 +165,8 @@ define([
             },
 
             createRendererVVbar: function (min, max, color, fieldname) {
-                console.log("z");
-                console.log(min);
-                console.log(max);
-                console.log(color);
-                var defaultcolor = [0, 0, 0, 1];
+                
+                var defaultcolor = [135, 135, 135, 0.2];
 
 
                 return new UniqueValueRenderer({
@@ -188,8 +183,8 @@ define([
                         field: fieldname,
                         stops: [
                             { value: min-1, color: defaultcolor},
-                            { value: min, color: [255,0,0,1] },
-                            { value: max, color: [255,0,0,1] },
+                            { value: min, color: color },
+                            { value: max, color: color },
                             { value: max+1, color: defaultcolor}
                         ]
                     }]
