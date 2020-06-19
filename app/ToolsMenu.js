@@ -169,7 +169,7 @@ define([
 
                     this.filterTool.setFilterState(this.state);
                     
-                    dom.byId("buildingInfo").innerHTML = "Number of Buildings: 118";
+                    dom.byId("buildingInfo").innerHTML = "Aantal gebouwen: 118";
 
                     
                 }.bind(this));

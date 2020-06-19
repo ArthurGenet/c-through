@@ -263,7 +263,7 @@ define([
 
             getSettingsFromUser: function (settings) {
                 if (settings === "demo"){
-                    dom.byId("headerTitle").innerHTML = "c-through Netherlands";
+                    dom.byId("headerTitle").innerHTML = "Gebouwenverkenner: c-through";
                     return settings_demo;
                 }
             }

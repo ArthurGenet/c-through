@@ -302,12 +302,13 @@ html, body {
   background: grey;
   color: white;
   text-align: center;
-  cursor: pointer
+  cursor: pointer;
+  font-size: 15.1px;
 }
 
 #reset{
   position: absolute;
-  width: 50px;
+  width: 150px;
   top: 240px;
   left: 20px;
   text-align: center;
@@ -375,7 +376,8 @@ html, body {
 }
 
 .filterDropdown{
-  width: 100%;;
+  width: 100%;
+  font-size: 14px;
 }
 
 #AreaMin{
